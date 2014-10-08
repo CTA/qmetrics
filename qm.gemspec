@@ -5,7 +5,7 @@ require 'qm/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "qm"
-  spec.version       = Qm::VERSION
+  spec.version       = QM::VERSION
   spec.authors       = ["Kevin Collette"]
   spec.email         = ["kevcollette@gmail.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}

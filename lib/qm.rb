@@ -1,5 +1,6 @@
 require "qm/version"
 
-module Qm
+module QM
   # Your code goes here...
 end
+
