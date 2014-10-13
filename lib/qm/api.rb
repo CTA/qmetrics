@@ -14,6 +14,9 @@ module QM
                                 options.merge(@auth)))
     end
 
+    def stats
+    end
+
     private
 
     def check_status(r)
