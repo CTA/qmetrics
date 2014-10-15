@@ -13,9 +13,17 @@ describe QM::Stats do
   end
 
   describe "any instance" do
-    it "should ensure defined methods add JAVA method calls to @blocks" do
-      stats.stints
-      expect(stats.blocks).to eq("&block=OkDO.StintsOk")
+    it "should ensure api methods add JAVA method calls to @blocks" do
+      stats.send(described_class::METHODS.first.first)
+      expect(stats.blocks).to eq("&block=#{described_class::METHODS.first.last}")
+    end
+  end
+
+  described_class::METHODS.each do |k,v|
+    describe "##{k}" do
+      it "should return a proper Queuemetrics API response" do
+        expect(stats.send(k)).to have_key(v)
+      end
     end
   end
 
@@ -24,17 +32,13 @@ describe QM::Stats do
       expect(stats.to_s).to be_a(String)
     end
 
-    it "should be in the correct form for an API call" do
-    end
-  end
+    it "should be in the form of a correct Queuemetrics API call" do
+      expected_response = "/QmStats/jsonStatsApi.do"  + 
+        "?queues=#{@stats_config.queues.join("|")}" +
+        "&from=#{@stats_config.from.strftime('%F.%H:%M:%S')}" +
+        "&to=#{@stats_config.to.strftime('%F.%H:%M:%S')}"
 
-  describe "#execute" do
-    it "should not throw an error" do
-      stats.stints
-      expect{stats.execute}.to_not raise_exception
-    end
-
-    it "should return a parsed response" do
+      expect(stats.to_s).to include(expected_response)
     end
   end
 

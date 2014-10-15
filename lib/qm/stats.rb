@@ -15,19 +15,21 @@ module QM
       @blocks = ""
     end
 
+    METHODS.each do 
+      |k,v| define_method(k.to_sym) do 
+        @blocks = "&block=#{v}"
+        execute
+      end
+    end
+
     def to_s
       "/QmStats/jsonStatsApi.do" + @queues + @from + @to + @blocks
     end
 
+    private
+
     def execute
       @api.call(to_s)
-    end
-
-    METHODS.each do 
-      |k,v| define_method(k.to_sym) do 
-        @blocks += "&block=#{v}"
-        return self 
-      end
     end
 
   end

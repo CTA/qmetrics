@@ -6,13 +6,13 @@ describe QM::API do
     @api_config = APIConfig.new
   end
   
-  describe ".new" do
+  describe "#new" do
     it "should return a new QM::API object" do
       expect(api).to be_a(QM::API)
     end
   end
 
-  describe ".call" do
+  describe "#call" do
     context "it is passed invalid auth credentials" do
 
       it "should throw an exception" do
@@ -34,6 +34,17 @@ describe QM::API do
       it "should return an array" do
         expect(api.call("agent/jsonEditorApi.do")).to be_an(Array)
       end
+    end
+
+  end
+
+  describe "#stats" do
+    let(:q) { [1] }
+    let(:from) { Time.now-86400 }
+    let(:to) { Time.now }
+
+    it "should return a QM::Stats object" do
+      expect(api.stats(q,from,to)).to be_an_instance_of(QM::Stats)
     end
 
   end
