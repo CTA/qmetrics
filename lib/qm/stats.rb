@@ -7,10 +7,11 @@ module QM
     METHODS = YAML.load_file(File.join(File.dirname(__FILE__),
                                         "stats_methods.yml"))    
 
-    def initialize(queues: , from: , to: )
+    def initialize(queues: , from: , to: , api: )
       @queues = "?queues=#{queues.join("|")}" 
       @from = "&from=#{from.strftime("%F.%H:%M:%S")}"
       @to = "&to=#{to.strftime("%F.%H:%M:%S")}"
+      @api = api
       @blocks = ""
     end
 
@@ -18,7 +19,16 @@ module QM
       "/QmStats/jsonStatsApi.do" + @queues + @from + @to + @blocks
     end
 
-    METHODS.each { |k,v| define_method(k.to_sym) { @blocks += "&block=#{v}" } }
+    def execute
+      @api.call(to_s)
+    end
+
+    METHODS.each do 
+      |k,v| define_method(k.to_sym) do 
+        @blocks += "&block=#{v}"
+        return self 
+      end
+    end
 
   end
 end

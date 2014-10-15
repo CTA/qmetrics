@@ -3,6 +3,7 @@ module QM
   end
 
   class API
+    attr_reader :stats
 
     def initialize(server: , port: , user: , pass: )
       @base_route = "http://#{server}:#{port}/queuemetrics"
@@ -14,13 +15,18 @@ module QM
                                 options.merge(@auth)))
     end
 
-    def stats
+    def stats(q,from,to)
+      @stats ||= QM::Stats.new(queues:q,from:from,to:to,api:self)
     end
 
     private
 
     def check_status(r)
-      r.response.code == "200" ? r : raise(HTTPStatusError, r.response.code)
+      if r.response.code == "200"
+        r.parsed_response
+      else
+        raise(HTTPStatusError, r.response.code)
+      end
     end
 
   end
