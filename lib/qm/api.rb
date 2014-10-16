@@ -3,7 +3,7 @@ module QM
   end
 
   class API
-    attr_reader :stats
+    attr_reader :stats, :realtime
 
     def initialize(server: , port: , user: , pass: )
       @base_route = "http://#{server}:#{port}/queuemetrics"
@@ -17,6 +17,10 @@ module QM
 
     def stats(q,from,to)
       @stats ||= QM::Stats.new(queues:q,from:from,to:to,api:self)
+    end
+
+    def realtime(q)
+      @realtime ||= QM::Realtime.new(queues:q,api:self)
     end
 
     private

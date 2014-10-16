@@ -10,6 +10,8 @@
 /spec/support/*.yml
 *.bundle
 *.so
+*.swp
+*.swo
 *.o
 *.a
 mkmf.log

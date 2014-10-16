@@ -1,0 +1,13 @@
+---
+  :queues_in_use: "RealtimeDO.RTRiassunto"
+  :calls_being_processed: "RealtimeDO.RTCallsBeingProc"
+  :agents_logged_in: "RealtimeDO.RTAgentsLoggedIn"
+  :wallboard_top_panel: "RealtimeDO.WallRiassunto"
+  :wall_calls_being_processed: "RealtimeDO.WallCallsBeingProc"
+  :visitor_calls_processed: "RealtimeDO.VisitorCallsProc"
+  :calls_taken: "RealtimeDO.VisitorTodaysOk"
+  :calls_lost: "RealtimeDO.VisitorTodaysKo"
+  :raw_agent_panel: "RealtimeDO.RtAgentsRaw"
+  :raw_calls_panel: "RealtimeDO.RtCallsRaw"
+
+

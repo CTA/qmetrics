@@ -5,6 +5,7 @@ require 'httparty'
 require "qm/version"
 require "qm/api"
 require "qm/stats"
+require "qm/realtime"
 
 module QM
   # Your code goes here...
