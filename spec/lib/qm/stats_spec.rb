@@ -33,7 +33,7 @@ describe QM::Stats do
     end
 
     it "should be in the form of a correct Queuemetrics API call" do
-      expected_response = "/QmStats/jsonStatsApi.do"  + 
+      expected_response = "/QmStats/jsonStatsApi.do" + 
         "?queues=#{@stats_config.queues.join("|")}" +
         "&from=#{@stats_config.from.strftime('%F.%H:%M:%S')}" +
         "&to=#{@stats_config.to.strftime('%F.%H:%M:%S')}"

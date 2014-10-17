@@ -6,6 +6,7 @@ require "qm/version"
 require "qm/api"
 require "qm/stats"
 require "qm/realtime"
+require "qm/response"
 
 module QM
   # Your code goes here...
