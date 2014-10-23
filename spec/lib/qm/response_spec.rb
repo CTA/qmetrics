@@ -1,20 +1,22 @@
 describe QM::Response do
 
   let(:stats) { QM::Stats.new(@stats_config.to_h) }
-  let(:response) { QM::Response.new(stats.stints) }
+  let(:api_methods) { stats.api_methods }
+  let(:response) do
+    QM::Response.new(stats.get(:stints,:answered_calls),api_methods)
+  end
 
   before :all do
     @stats_config = StatsConfig.new
   end
 
-  describe "#response" do
+  describe "#result" do
     it "should respond" do
       expect{response}.not_to raise_exception
     end
 
-    it "should be an Array of Hashes" do
-      expect(response.result).to be_an(Array)
-      expect(response.result.first).to be_a(Hash)
+    it "should be a Hash" do
+      expect(response.result).to be_an(Hash)
     end
 
   end

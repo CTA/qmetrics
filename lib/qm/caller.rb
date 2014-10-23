@@ -39,7 +39,7 @@ module QM
     end
 
     def execute
-      @api.call(to_s)
+      QM::Response.new(@api.call(to_s),api_methods)
     end
 
     def call_exists?(call)
