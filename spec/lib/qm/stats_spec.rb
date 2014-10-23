@@ -8,22 +8,14 @@ describe QM::Stats do
 
   describe "METHODS constant" do
     it "should exist" do
-      expect(described_class::METHODS).not_to be_nil
+      expect(stats.api_methods).not_to be_nil
     end
   end
 
   describe "any instance" do
     it "should ensure api methods add JAVA method calls to @blocks" do
-      stats.send(described_class::METHODS.first.first)
-      expect(stats.blocks).to eq("&block=#{described_class::METHODS.first.last}")
-    end
-  end
-
-  described_class::METHODS.each do |k,v|
-    describe "##{k}" do
-      it "should return a proper Queuemetrics API response" do
-        expect(stats.send(k)).to have_key(v)
-      end
+      stats.send(stats.api_methods.first.first)
+      expect(stats.blocks.first).to eq(stats.api_methods.first.last)
     end
   end
 

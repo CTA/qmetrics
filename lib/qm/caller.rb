@@ -1,6 +1,6 @@
 module QM
   class Caller
-    attr_reader :blocks
+    attr_reader :blocks, :api_methods
 
     def initialize(queues: , api: )
       @queues = queues
@@ -19,11 +19,24 @@ module QM
       "/jsonStatsApi.do?queues=#{@queues.join("|")}"
     end
 
-    def api_methods(file)
+    def load_api_methods(file)
       @api_methods ||= load_yml(file)
     end
 
     private
+    
+    def load_yml(file)
+      YAML.load_file(File.join(File.dirname(__FILE__),file))
+    end
+
+    def generate_api_methods
+      api_methods.each do |k,v| 
+        self.class.send(:define_method,k.to_sym) do
+          @blocks.push v
+          execute
+        end
+      end
+    end
 
     def execute
       @api.call(to_s)
@@ -31,10 +44,6 @@ module QM
 
     def call_exists?(call)
       @api_methods.keys.include? call
-    end
-
-    def self.load_yml(file)
-      YAML.load_file(File.join(File.dirname(__FILE__),file))
     end
 
   end

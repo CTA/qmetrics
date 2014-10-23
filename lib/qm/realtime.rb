@@ -1,35 +1,16 @@
-require 'yaml'
-
 module QM
-  class Realtime
-    attr_reader :blocks
+  class Realtime < Caller
 
-    METHODS = YAML.load_file(File.join(File.dirname(__FILE__),
-                                       "realtime_methods.yml"))
-
-    def initialize(queues: , api: )
-      @queues = "?queues=#{queues.join("|")}"
-      @api = api
-      @blocks = ""
-    end
-
-    METHODS.each do
-      |k,v| define_method(k) do
-        @blocks = "&block=#{v}" 
-        execute
-      end
+    def initialize(args)
+      super
+      load_api_methods("realtime_methods.yml")
+      generate_api_methods
     end
 
     def to_s
-      "/QmRealtime/jsonStatsApi.do" + @queues + @blocks
-    end
-
-    private
-
-    def execute
-      @api.call(to_s)
+      "/QmRealtime" + super +
+      @blocks.map {|b| "&block=#{b}"}.join
     end
 
   end
-
 end

@@ -1,35 +1,19 @@
-require 'yaml'
-
 module QM
-  class Stats
-    attr_reader :blocks
+  class Stats < Caller
 
-    METHODS = YAML.load_file(File.join(File.dirname(__FILE__),
-                                        "stats_methods.yml"))    
-
-    def initialize(queues: , from: , to: , api: )
-      @queues = "?queues=#{queues.join("|")}" 
-      @from = "&from=#{from.strftime("%F.%H:%M:%S")}"
-      @to = "&to=#{to.strftime("%F.%H:%M:%S")}"
-      @api = api
-      @blocks = ""
-    end
-
-    METHODS.each do 
-      |k,v| define_method(k.to_sym) do 
-        @blocks = "&block=#{v}"
-        execute
-      end
+    def initialize(from: , to: , **args)
+      super(args)
+      @from = from
+      @to = to
+      load_api_methods("stats_methods.yml")
+      generate_api_methods
     end
 
     def to_s
-      "/QmStats/jsonStatsApi.do" + @queues + @from + @to + @blocks
-    end
-
-    private
-
-    def execute
-      @api.call(to_s)
+      "/QmStats" + super +
+      "&from=#{@from.strftime("%F.%H:%M:%S")}" \
+      "&to=#{@to.strftime("%F.%H:%M:%S")}" +
+      @blocks.map {|b| "&block=#{b}"}.join
     end
 
   end

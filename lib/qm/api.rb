@@ -11,7 +11,7 @@ module QM
     end
 
     def call(api_method,options={})
-      check_status(HTTParty.get("#{@base_route}/#{api_method}", 
+      check_status(HTTParty.get("#{@base_route}/#{api_method}",
                                 options.merge(@auth)))
     end
 
