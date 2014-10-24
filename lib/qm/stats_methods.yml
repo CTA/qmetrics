@@ -71,7 +71,6 @@
   :answered_calls_by_service_group: "AgentsDO.AnsCallsSG"
   :agent_performance_by_acd_group: "AgentsDO.PerformanceAcdGroups"
   :agent_occupancy_report: "AgentsDO.AgentOccupancy"
-  :agent_session_time_by_hour: "AgentsDO.AgentBillableTimeByHour"
   :agent_payable_time_by_hour: "AgentsDO.AgentPayableTimeByHour"
   :agent_billable_time_by_hour: "AgentsDO.AgentBillableTimeByHour"
   :detail_of_agent_pauses: "DetailsDO.AgentPauses"

@@ -3,7 +3,7 @@ module QM
     attr_reader :status, :description, :time_elapsed, :qm_version, :result
 
     def initialize(qm_result,api_methods)
-      @api_methods = api_methods
+      @api_methods  = api_methods
       @status       = qm_result["result"][0][1]
       @description  = qm_result["result"][1][1]
       @time_elapsed = "#{qm_result["result"][2][1]}ms"
