@@ -1,6 +1,6 @@
-# Qm
+# QM
 
-TODO: Write a gem description
+QM is a gem that wraps the Queuemetrics JSON API with Ruby!
 
 ## Installation
 
@@ -20,7 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+api = QM::API.new(server: 192.168.1.101, port: 80, user: "foo", pass: "bar")
+api.stats(queue: [4343], from: Time.now-86400, to: Time.now)
+
+p api.stats.all_calls
+
+```
 
 ## Contributing
 
