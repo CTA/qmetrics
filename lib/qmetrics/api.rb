@@ -3,7 +3,6 @@ module Qmetrics
   end
 
   class API
-    attr_reader :stats, :realtime
 
     def initialize(server: , port: , user: , pass: )
       @base_route = "http://#{server}:#{port}/queuemetrics"
@@ -15,12 +14,20 @@ module Qmetrics
                                 options.merge(@auth)))
     end
 
-    def stats(q,from,to)
-      @stats ||= Qmetrics::Stats.new(queues:q,from:from,to:to,api:self)
+    def stats(args)
+      if args.empty?
+        @stats
+      else
+        @stats = Qmetrics::Stats.new(args.merge({api: self}))
+      end
     end
 
-    def realtime(q)
-      @realtime ||= Qmetrics::Realtime.new(queues:q,api:self)
+    def realtime(args)
+      if args.empty?
+        @realtime
+      else
+        @realtime = Qmetrics::Realtime.new(args.merge({api: self}))
+      end
     end
 
     private

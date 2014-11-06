@@ -39,12 +39,12 @@ describe Qmetrics::API do
   end
 
   describe "#stats" do
-    let(:q) { [1] }
-    let(:from) { Time.now-86400 }
-    let(:to) { Time.now }
+    let(:q_stats) { { queues: [1],
+                      from: Time.now-86400,
+                      to: Time.now } }
 
     it "should return a Qmetrics::Stats object" do
-      expect(api.stats(q,from,to)).to be_an_instance_of(Qmetrics::Stats)
+      expect(api.stats(q_stats)).to be_an_instance_of(Qmetrics::Stats)
     end
 
   end
