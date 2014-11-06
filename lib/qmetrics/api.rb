@@ -14,7 +14,7 @@ module Qmetrics
                                 options.merge(@auth)))
     end
 
-    def stats(args)
+    def stats(**args)
       if args.empty?
         @stats
       else
@@ -22,7 +22,7 @@ module Qmetrics
       end
     end
 
-    def realtime(args)
+    def realtime(**args)
       if args.empty?
         @realtime
       else
