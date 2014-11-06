@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'qmetrics/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "Qmetrics"
+  spec.name          = "qmetrics"
   spec.version       = Qmetrics::VERSION
   spec.authors       = ["Kevin Collette"]
   spec.email         = ["kevcollette@gmail.com"]
