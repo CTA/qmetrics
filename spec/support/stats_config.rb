@@ -8,7 +8,7 @@ class StatsConfig
     @queues = @stats_config[:queues]
     @from = Time.parse(@stats_config[:from])
     @to = Time.parse(@stats_config[:to])
-    @api = QM::API.new(@api_config.to_h) 
+    @api = Qmetrics::API.new(@api_config.to_h) 
   end
 
   def to_h

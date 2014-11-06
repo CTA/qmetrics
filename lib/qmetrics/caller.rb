@@ -1,4 +1,4 @@
-module QM
+module Qmetrics
   class Caller
     attr_reader :blocks
 
@@ -47,7 +47,7 @@ module QM
     end
 
     def execute
-      QM::Response.new(@api.call(to_s),api_methods)
+      Qmetrics::Response.new(@api.call(to_s),api_methods)
     end
 
     def call_exists?(call)

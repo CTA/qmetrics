@@ -1,4 +1,4 @@
-RSpec.shared_examples 'a QM::Caller' do |config_obj|
+RSpec.shared_examples 'a Qmetrics::Caller' do |config_obj|
   
   caller = described_class.new(config_obj.to_h)
 
@@ -17,7 +17,7 @@ RSpec.shared_examples 'a QM::Caller' do |config_obj|
       let(:response) { @response.dup }
 
       it "should return an API Response" do
-        expect(response).to be_a(QM::Response)
+        expect(response).to be_a(Qmetrics::Response)
       end
 
       it "should return a response with the API call's key" do

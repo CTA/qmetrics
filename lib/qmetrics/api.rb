@@ -1,4 +1,4 @@
-module QM
+module Qmetrics
   class HTTPStatusError < StandardError
   end
 
@@ -16,11 +16,11 @@ module QM
     end
 
     def stats(q,from,to)
-      @stats ||= QM::Stats.new(queues:q,from:from,to:to,api:self)
+      @stats ||= Qmetrics::Stats.new(queues:q,from:from,to:to,api:self)
     end
 
     def realtime(q)
-      @realtime ||= QM::Realtime.new(queues:q,api:self)
+      @realtime ||= Qmetrics::Realtime.new(queues:q,api:self)
     end
 
     private

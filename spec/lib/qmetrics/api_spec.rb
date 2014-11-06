@@ -1,14 +1,14 @@
-describe QM::API do
+describe Qmetrics::API do
 
-  let(:api) { QM::API.new(@api_config.to_h) }
+  let(:api) { Qmetrics::API.new(@api_config.to_h) }
   
   before :all do
     @api_config = APIConfig.new
   end
   
   describe "#new" do
-    it "should return a new QM::API object" do
-      expect(api).to be_a(QM::API)
+    it "should return a new Qmetrics::API object" do
+      expect(api).to be_a(Qmetrics::API)
     end
   end
 
@@ -19,7 +19,7 @@ describe QM::API do
         api_config = {server: @api_config.server,
                       port: @api_config.port,
                       user: "foo", pass: "bar" }
-        wrong_api = QM::API.new(api_config.to_h)
+        wrong_api = Qmetrics::API.new(api_config.to_h)
         expect{wrong_api.call("agent/jsonEditorApi.do")}.to raise_exception("501")
       end
     end
@@ -43,8 +43,8 @@ describe QM::API do
     let(:from) { Time.now-86400 }
     let(:to) { Time.now }
 
-    it "should return a QM::Stats object" do
-      expect(api.stats(q,from,to)).to be_an_instance_of(QM::Stats)
+    it "should return a Qmetrics::Stats object" do
+      expect(api.stats(q,from,to)).to be_an_instance_of(Qmetrics::Stats)
     end
 
   end

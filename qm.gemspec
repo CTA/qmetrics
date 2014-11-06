@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'qm/version'
+require 'Qmetrics/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "qm"
-  spec.version       = QM::VERSION
+  spec.name          = "Qmetrics"
+  spec.version       = Qmetrics::VERSION
   spec.authors       = ["Kevin Collette"]
   spec.email         = ["kevcollette@gmail.com"]
   spec.summary       = %q{A gem that wraps the Queuemetrics JSON API with Ruby}

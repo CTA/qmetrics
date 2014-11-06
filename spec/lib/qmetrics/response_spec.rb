@@ -1,6 +1,6 @@
-describe QM::Response do
+describe Qmetrics::Response do
 
-  let(:stats) { QM::Stats.new(@stats_config.to_h) }
+  let(:stats) { Qmetrics::Stats.new(@stats_config.to_h) }
   let(:api_methods) { stats.api_methods }
   let(:response) { stats.get(:stints,:answered_calls) }
 

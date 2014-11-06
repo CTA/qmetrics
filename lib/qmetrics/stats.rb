@@ -1,4 +1,4 @@
-module QM
+module Qmetrics
   class Stats < Caller
     load_api_methods("stats_methods.yml")
     generate_api_methods

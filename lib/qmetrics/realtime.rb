@@ -1,4 +1,4 @@
-module QM
+module Qmetrics
   class Realtime < Caller
     load_api_methods("realtime_methods.yml")
     generate_api_methods
