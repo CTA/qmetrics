@@ -1,16 +1,16 @@
 module Qmetrics
   class Response
-    attr_reader :status, :description, :time_elapsed, :Qmetrics_version, :result
+    attr_reader :status, :description, :time_elapsed, :qmetrics_version, :result
 
     def initialize(qmetrics_result,api_methods)
       @api_methods        = api_methods
       @status             = qmetrics_result["result"][0][1]
       @description        = qmetrics_result["result"][1][1]
       @time_elapsed       = "#{qmetrics_result["result"][2][1]}ms"
-      @Qmetrics_version   = qmetrics_result["result"][3][1]
+      @qmetrics_version   = qmetrics_result["result"][3][1]
 
       qmetrics_result.delete("result")
-      zip_results(qmetrics_result)
+      @result = zip_results(qmetrics_result)
     end
 
     private
@@ -27,13 +27,21 @@ module Qmetrics
       @api_methods.invert[java_method_name]
     end
 
-    def zip_arrs(method_results)
-      results = []
-      header = method_results.first
-      method_results.each_with_index do |r,i|
-        results.push(Hash[header.zip(r)]) unless i == 0
+    def zip_arrs(r)
+      r.first.size > 2 ? zip_keys_and_values(r) : hashify_values(r)
+    end
+
+    def zip_keys_and_values(results)
+      h = results.first
+      results[1..results.size].inject({}) do |a,v|
+        a.merge(Hash[h.zip(v)])
       end
-      results
+    end
+
+    def hashify_values(results)
+      results.inject({}) do |a,v|
+        a.merge({v.first => v.last})
+      end
     end
 
   end

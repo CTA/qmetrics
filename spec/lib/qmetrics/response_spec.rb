@@ -1,10 +1,11 @@
 describe Qmetrics::Response do
 
-  let(:stats) { Qmetrics::Stats.new(@stats_config.to_h) }
-  let(:api_methods) { stats.api_methods }
-  let(:response) { stats.get(:stints,:answered_calls) }
+  let(:api) { Qmetrics::API.new(@api_config.to_h)}
+  let(:stats) { api.stats(@stats_config.to_h) }
+  let(:response) { stats.get(:stints,:all_calls) }
 
   before :all do
+    @api_config = APIConfig.new
     @stats_config = StatsConfig.new
   end
 

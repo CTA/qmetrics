@@ -20,11 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
+Note that this gem is unfinished! Things still need to be tweaked and tested.
+
 ```ruby
 api = Qmetrics::API.new(server: 192.168.1.101, port: 80, user: "foo", pass: "bar")
 api.stats(queue: [4343], from: Time.now-86400, to: Time.now)
 
-p api.stats.all_calls
+p api.stats.all_calls.result
 
 ```
 
