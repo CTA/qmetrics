@@ -28,7 +28,7 @@ module Qmetrics
     end
 
     def zip_arrs(r)
-      r.first.size > 2 ? zip_keys_and_values(r) : hashify_values(r)
+      r.first.size > 2 ? zip_keys_and_values(r) : hashify_pairs(r)
     end
 
     def zip_keys_and_values(results)
@@ -38,7 +38,7 @@ module Qmetrics
       end
     end
 
-    def hashify_values(results)
+    def hashify_pairs(results)
       results.inject({}) do |a,v|
         a.merge({v.first => v.last})
       end
