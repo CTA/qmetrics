@@ -32,16 +32,25 @@ module Qmetrics
     end
 
     def zip_keys_and_values(results)
-      h = results.first
+      h = cleanse_arr(results.first)
       results[1..results.size].inject([]) do |a,v|
-        a.push(Hash[h.zip(v)])
+        a.push(Hash[h.zip(cleanse_arr(v))])
       end
     end
 
     def hashify_pairs(results)
       results.inject({}) do |a,v|
-        a.merge({v.first => v.last})
+        a.merge(cleanse(v.first) => cleanse(v.last))
       end
+    end
+
+    def cleanse_arr(values)
+      values.map {|n| cleanse(n) }
+    end
+
+    def cleanse(value)
+      ['&nbsp;', '&lt;'].each{|t| value.gsub!(t,"")}
+      value.strip
     end
 
   end
