@@ -8,7 +8,7 @@ RSpec.shared_examples 'a Qmetrics::Caller' do |config_obj|
     end
   end
 
-  caller.api_methods.each do |k,v|
+  caller.api_methods.each do |k, v|
     describe "##{k}" do
       before :all do
         @response = caller.public_send(k)

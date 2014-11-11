@@ -38,7 +38,7 @@ module Qmetrics
     end
 
     def self.generate_api_methods
-      api_methods.each do |k,v| 
+      api_methods.each do |k, v| 
         define_method(k.to_sym) do
           @blocks = [v]
           execute

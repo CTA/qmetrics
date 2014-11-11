@@ -17,7 +17,7 @@ module Qmetrics
 
     def zip_results(qmetrics_result)
       @result = {}
-      qmetrics_result.each do |k,v|
+      qmetrics_result.each do |k, v|
         @result[translate_method_name(k)] = zip_arrs(v)
       end
       @result
@@ -33,8 +33,8 @@ module Qmetrics
 
     def zip_keys_and_values(results)
       h = results.first
-      results[1..results.size].inject({}) do |a,v|
-        a.merge(Hash[h.zip(v)])
+      results[1..results.size].inject([]) do |a,v|
+        a.push(Hash[h.zip(v)])
       end
     end
 
