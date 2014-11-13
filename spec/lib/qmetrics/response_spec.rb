@@ -14,8 +14,23 @@ describe Qmetrics::Response do
       expect{response.result}.not_to raise_exception
     end
 
-    it "should be a Hash" do
-      expect(response.result).to be_a(Hash)
+    context "The result is for multiple agents" do
+      let(:result) { stats.answered_calls.result }
+
+      it "should be an Array of Hashes" do
+        expect(result[:answered_calls]).to be_an(Array)
+        expect(result[:answered_calls].first).to be_a(Hash)
+      end
+
+    end
+
+    context "The result is for all agents" do
+      let(:result) { stats.all_calls.result } 
+
+      it "should be a Hash" do
+        expect(result[:all_calls]).to be_a(Hash)
+      end
+
     end
 
   end
