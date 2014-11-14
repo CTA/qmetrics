@@ -33,6 +33,32 @@ describe Qmetrics::Response do
 
     end
 
+    it "should remove HTML character entities from output" do
+      result = stats.agent_payable_time_by_hour.result
+      result[:agent_payable_time_by_hour].each do |n|
+        n.each do |k,v|
+          expect(k).to_not include("&nbsp;")
+          expect(v).to_not include("&nbsp;")
+          expect(k).to_not include("&lt;")
+          expect(v).to_not include("&lt;")
+        end
+      end
+    end
+
+    it "should remove superflous key-value pairs" do
+      result = stats.unanswered_calls_details.result
+      junk = ["...","-",""]
+      result[:unanswered_calls_details].each do |n|
+        n.each do |k,v|
+          if junk.include?(k)
+            expect(junk).not_to include(v)
+          elsif junk.include?(v)
+            expect(junk).not_to include(k)
+          end 
+        end
+      end
+    end
+
   end
 
 end

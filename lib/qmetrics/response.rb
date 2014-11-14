@@ -28,29 +28,37 @@ module Qmetrics
     end
 
     def zip_arrs(r)
-      r.first.size > 2 ? zip_keys_and_values(r) : hashify_pairs(r)
+      r.first.size > 2 ? clean_output(zip_keys_and_values(r)) : hashify_pairs(r)
     end
 
     def zip_keys_and_values(results)
-      h = cleanse_arr(results.first)
-      results[1..results.size].inject([]) do |a,v|
-        a.push(Hash[h.zip(cleanse_arr(v))])
+      h = purge_entities_arr(results.first)
+      results[1..results.size].inject([]) do |a, v|
+        a.push(Hash[h.zip(purge_entities_arr(v))])
       end
+    end
+
+    def clean_output(output)
+      output.map { |n| n.select { |k, v| !(junk_data?(k) && junk_data?(v)) } }
     end
 
     def hashify_pairs(results)
-      results.inject({}) do |a,v|
-        a.merge(cleanse(v.first) => cleanse(v.last))
+      results.inject({}) do |a, v|
+        a.merge(purge_entities(v.first) => purge_entities(v.last))
       end
     end
 
-    def cleanse_arr(values)
-      values.map {|n| cleanse(n) }
+    def purge_entities_arr(values)
+      values.map {|n| purge_entities(n) }
     end
 
-    def cleanse(value)
+    def purge_entities(value)
       ['&nbsp;', '&lt;'].each{|t| value.gsub!(t,"")}
       value.strip
+    end
+
+    def junk_data?(value)
+      ["...","","-"].include? value
     end
 
   end
