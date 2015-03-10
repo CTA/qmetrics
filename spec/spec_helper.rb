@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
+require 'yaml'
 require 'qmetrics'
 
 Dir["./spec/support/**/*.rb"].each { |f| require f }

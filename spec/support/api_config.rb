@@ -1,5 +1,3 @@
-require 'yaml'
-
 class APIConfig
   attr_reader :server, :port, :user, :pass
 
@@ -13,7 +11,7 @@ class APIConfig
   end
 
   def to_h
-    @api_config 
+    @api_config
   end
 
 end
