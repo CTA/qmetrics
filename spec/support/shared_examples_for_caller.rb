@@ -26,6 +26,17 @@ RSpec.shared_examples 'a Qmetrics::Caller' do |config_obj|
     end
   end
 
+  describe "#get" do
+    let(:method) { caller.api_methods.first.first }
+    let(:method2) { caller.api_methods.take(2).last.first }
+    let(:response) { caller.get(method, method2) }
+    it "should return responses for all api methods passed to it." do
+      expect(response).to be_a(Qmetrics::Response)
+      expect(response.result).to have_key(method)
+      expect(response.result).to have_key(method2)
+    end
+  end
+
   describe "#to_s" do
     it "should return a string" do
       expect(caller.to_s).to be_a(String)

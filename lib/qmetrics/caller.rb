@@ -1,6 +1,5 @@
 module Qmetrics
   class Caller
-    attr_reader :blocks
 
     class << self 
       attr_reader :api_methods
@@ -9,10 +8,11 @@ module Qmetrics
     def initialize(queues: , api: )
       @queues = queues
       @api = api
-      @blocks = []
+      clear_blocks
     end
 
     def get(*args)
+      clear_blocks
       args.each do |k|
         @blocks.push(api_methods[k.to_sym]) if call_exists?(k.to_sym)
       end
@@ -52,6 +52,10 @@ module Qmetrics
 
     def call_exists?(call)
       api_methods.keys.include? call
+    end
+
+    def clear_blocks
+      @blocks = []
     end
 
   end
