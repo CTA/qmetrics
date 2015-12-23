@@ -19,8 +19,9 @@ module Qmetrics
       execute
     end
 
+    # url encoded '|' to '%7C'
     def to_s
-      "/jsonStatsApi.do?queues=#{@queues.join("|")}"
+      "/jsonStatsApi.do?queues=#{@queues.join('%7C')}"
     end
 
     def self.load_api_methods(file)
