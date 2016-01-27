@@ -108,6 +108,7 @@ p api.stats.all_calls.result
   - agent_occupancy_report
   - agent_payable_time_by_hour
   - agent_billable_time_by_hour
+  - detail_of_agent_sessions
   - detail_of_agent_pauses
   - outcomes
   - call_results_by_outcomes
